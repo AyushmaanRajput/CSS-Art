@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSS Art</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        height: 100vh;
+        width:100vw;
+        overflow: hidden;
+        /* background:red; */
+        /* background-image: linear-gradient(#6c9caa, white); */
+      }
+      h1{
+        color:#d39999;
+        font-family:monospace;
+        text-align: center;
+        font-size:70px;
+        margin-top: 40px;
+      }
+      .canvas {
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        width: 800px;
+        height: 800px;
+        transform: translate(-50%, -50%);
+        /* background-color: #4c6971; */
+        padding: 50px;
+      }
+      .circle {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        position: relative;
+        z-index: -3;
+        background-color: #f8eeee;
+        /* border:50px solid #fad8d8;   */
+      }
+      .circle::before{
+        content:"";
+        border-radius: 50%;
+        width:100%;
+        height:100%;
+        position:absolute;
+        border:50px solid transparent;
+        border-top-color: #d39999;
+        animation: revolve 1s linear infinite; 
+      }
+
+      .ears {
+        border: 10px solid rgb(0, 0, 0);
+        width: 200px;
+        height: 200px;
+        border-radius: 0% 100% 76% 24% / 24% 38% 62% 76%;
+        position: absolute;
+        top: -15%;
+        left: -5%;
+        z-index: -1;
+      }
+      .ears::before {
+        position: absolute;
+        content: "";
+        height: 150px;
+        width: 150px;
+        border-radius: 0% 100% 76% 24% / 24% 38% 62% 76%;
+        background-color: #fad8d8;
+        left: 20%;
+        top: 20%;
+        transition: all 0.2s ease-in;
+      }
+      .flipped {
+        transform: rotateY(180deg);
+        position: absolute;
+        right: -5%;
+        left: auto;
+      }
+
+      .head {
+        border: 10px solid black;
+        width: 55%;
+        height: 37.5%;
+        margin: auto;
+        position: relative;
+        /* z-index: 1; */
+        top: 35%;
+        background-color: rgb(255, 255, 255);
+        opacity: 1;
+        border-radius: 50% 50% 40% 40%/90% 90% 70px 70px;
+      }
+      .head:hover .ears::before{
+        left:15%;
+        top:15%;
+        background-color: #edbebedf;
+      }
+      .head:hover .blush{
+        width: 35px;
+        height: 25px;
+        bottom: 18%;
+        background-color: #edbebedf;
+      }
+      .head:hover .cheeks{
+        animation: shake 1s linear infinite alternate;
+      }
+      .head:hover .cheeks{
+        background-color: #edbebedf;
+      }
+      .eyes {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background-color: black;
+        bottom: 27.5%;
+        left: 22.5%;
+      }
+      .eyes::before,
+      .eyes::after {
+        position: absolute;
+        content: "";
+        width: 30px;
+        height: 20px;
+        background: transparent;
+        left: -10%;
+        border: 7px solid black;
+        border-radius: 50%;
+        border-top: none;
+        border-right: none;
+        border-bottom: none;
+        transform: rotate(-45deg);
+      }
+      .eyes::after {
+        top: 20%;
+        left: -20%;
+      }
+      .right {
+        left: auto;
+        right: 22.5%;
+      }
+      .right::before,
+      .right::after {
+        left: auto;
+        right: -10%;
+        transform: rotate(225deg);
+      }
+      .right::after {
+        left: auto;
+        right: -20%;
+      }
+      .cheeks {
+        width: 60px;
+        height: 40px;
+        background-color: #fad8d8;
+        border-radius: 50%;
+        position: absolute;
+        bottom: 10%;
+        left: 5%;
+        transition: background-color;
+      }
+      .second {
+        left: auto;
+        right: 5%;
+        transition: all 0.2s ease-in;
+        transition: background-color;
+
+      }
+      .nose::before,
+      .nose::after {
+        content: "";
+        position: absolute;
+        bottom: 12%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 40px;
+        height: 40px;
+        background-color: transparent !important;
+        border-radius: 50%;
+        border: 8px solid black;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        transform: rotate(-45deg);
+      }
+      .nose::before {
+        left: 41%;
+      }
+      .nose::after {
+        left: 49%;
+      }
+      .blush {
+        width: 30px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #fad8d8;
+        position: absolute;
+        bottom: 20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        transition: all 0.2s ease-in;
+      }
+
+      @keyframes shake{
+        0%{
+          transform:translateX(0);
+        }
+        25%{
+          tranform:translateX(-10px);
+        }
+        50%{
+          transform:translateX(+10px);
+        }
+        75%{
+          transform:translateX(-10px);
+        }
+        100%{
+          transform: translateX(+10px);
+        }
+      }
+      @keyframes revolve{
+        0%{
+         transform: rotate(0deg);
+        }
+        25%{
+          transform: rotate(90deg);
+        }
+        50%{
+          transform: rotate(180deg);
+        }
+        75%{
+          transform:rotate(270deg);
+        }
+        100%{
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+      Hover the cat!
+    </h1>
+    <div class="canvas">
+      <div class="circle">
+        <div class="head">
+          <div class="ears"></div>
+          <div class="ears flipped"></div>
+
+          <div class="eyes"></div>
+          <div class="eyes right"></div>
+          <div class="blush"></div>
+          <div class="nose"></div>
+          <div class="cheeks"></div>
+          <div class="cheeks second"></div>
+        </div>
+    </div>
+  </body>
+</html>
